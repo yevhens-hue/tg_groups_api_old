@@ -1,0 +1,5 @@
+HUMAN-IN-THE-LOOP: Требуется ручное вмешательство
+Мерчант: 1xbet
+URL: https://indian.1xbet.com/ru/login
+Trace: traces/1xbet_trace.zip
+Время: 2026-01-01 13:40:16

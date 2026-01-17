@@ -1,0 +1,62 @@
+# mirrors.py
+
+import requests
+from urllib.parse import urlparse
+from bs4 import BeautifulSoup
+
+
+SERPAPI_API_KEY = "f1d398bf2f711547f0165e09ebbbf344bf6da001cbcba9e89c42af83ae865556"
+
+
+MERCHANTS = {
+    "1xbet": {
+        "brand": "1xbet",
+        "official_domains": ["1xbet.com", "1xbet.xyz", "indi.1xbet.com"],
+    },
+
+    "dafabet": {
+        "brand": "dafabet",
+        "official_domains": ["dafabet.com", "dafabetindia.com"],
+    },
+
+    "stake": {
+        "brand": "stake",
+        "official_domains": ["stake.com"],
+    },
+
+    "parimatch": {
+        "brand": "parimatch",
+        "official_domains": ["parimatch.com", "parimatch.in"],
+    },
+
+    "4rabet": {
+        "brand": "4rabet",
+        "official_domains": ["4rabet.com", "4rabet.in"],
+    },
+
+    "playinexch": {
+        "brand": "playinexch",
+        "official_domains": ["playinexch.com", "playinexch.co"],
+    },
+
+    "bcgame": {
+        "brand": "bc game",
+        "official_domains": ["bc.game"],
+    },
+
+    "1win": {
+        "brand": "1win",
+        "official_domains": ["1win.com", "1win.xyz", "1win.in"],
+    },
+
+    "melbet": {
+        "brand": "melbet",
+        "official_domains": ["melbet.com", "melbet.in"],
+    },
+
+    "fun88": {
+        "brand": "fun88",
+        "official_domains": ["fun88.com", "fun88india.com"],
+    },
+}
+

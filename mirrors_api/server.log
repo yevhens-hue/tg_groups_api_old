@@ -1,0 +1,69 @@
+INFO:     Started server process [52191]
+INFO:     Waiting for application startup.
+{"environment": "development", "event": "app_starting", "level": "info", "timestamp": "2026-01-09T13:55:45.985130Z"}
+{"count": 2, "event": "browser_pool_initialized", "level": "info", "timestamp": "2026-01-09T13:55:51.010303Z"}
+{"environment": "development", "event": "app_started", "level": "info", "timestamp": "2026-01-09T13:55:51.012005Z"}
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8011 (Press CTRL+C to quit)
+{"method": "POST", "path": "/parse_payment_data_ar", "query_params": {}, "client_ip": "127.0.0.1", "user_agent": "curl/8.7.1", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "event": "request_received", "level": "info", "timestamp": "2026-01-09T13:56:52.230893Z"}
+{"email": "perymury78@gmail.com", "base_url": "https://1win.lat/", "event": "payment_parser_starting", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:56:52.295721Z"}
+{"user_data_dir": "/Users/yevhen.shaforostov/.cache/mirrors_api/1win_ar_profile", "event": "payment_parser_using_persistent_context", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:56:52.296257Z"}
+{"url": "https://1win.lat/", "event": "payment_parser_navigating", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:04.703130Z"}
+{"event": "payment_parser_navigating_to_deposit", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:10.000703Z"}
+{"text": "Dep\u00f3sito", "event": "payment_parser_deposit_clicked", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:15.523188Z"}
+{"event": "payment_parser_selecting_payment_method", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:15.528353Z"}
+{"provider": "Claro Pay", "status": "not_found", "current_url": "https://1win.lat/", "path": "/Users/yevhen.shaforostov/.cache/mirrors_api/screenshots/provider_claro_20260109_145719.png", "event": "payment_parser_provider_screenshot_taken", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:19.923083Z"}
+{"current_url": "https://1win.lat/", "event": "payment_parser_claro_pay_not_found", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "warning", "timestamp": "2026-01-09T13:57:19.924502Z"}
+{"event": "payment_parser_selecting_fiat_type", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:19.924679Z"}
+{"event": "payment_parser_extracting_data", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:24.976097Z"}
+{"event": "payment_parser_screenshot_taken", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:31.230464Z"}
+{"domain": "1win.lat", "event": "payment_parser_domain_extracted", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:31.465664Z"}
+{"path": "/Users/yevhen.shaforostov/.cache/mirrors_api/screenshots/payment_form_20260109_145732.png", "event": "payment_parser_screenshot_taken", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:32.655551Z"}
+{"domain": "1win.lat", "method": "Claro Pay", "url": "https://1win.lat/", "event": "payment_parser_success", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:32.655986Z"}
+{"has_url": true, "has_token": false, "event": "payment_parser_export_skipped_no_token", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:32.887606Z"}
+{"success": true, "domain": "1win.lat", "method": "Claro Pay", "url": "https://1win.lat/", "export_success": false, "event": "payment_parser_completed", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:32.888914Z"}
+{"status_code": 200, "process_time": 40.722, "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "event": "request_completed_success", "level": "info", "timestamp": "2026-01-09T13:57:32.952945Z"}
+{"method": "POST", "path": "/parse_payment_data_ar", "status_code": 200, "process_time": 40.736, "event": "request_completed", "request_id": "d5b6265c-83c7-4a04-b326-276ae75d044e", "level": "info", "timestamp": "2026-01-09T13:57:32.956908Z"}
+INFO:     127.0.0.1:59285 - "POST /parse_payment_data_ar HTTP/1.1" 200 OK
+{"method": "GET", "path": "/health", "query_params": {}, "client_ip": "127.0.0.1", "user_agent": "curl/8.7.1", "request_id": "4db92ac9-bd01-4d02-b4ae-8ecd35ba8d37", "event": "request_received", "level": "info", "timestamp": "2026-01-09T16:53:28.378137Z"}
+{"status_code": 200, "process_time": 0.117, "request_id": "4db92ac9-bd01-4d02-b4ae-8ecd35ba8d37", "event": "request_completed_success", "level": "info", "timestamp": "2026-01-09T16:53:28.492472Z"}
+{"method": "GET", "path": "/health", "status_code": 200, "process_time": 0.128, "event": "request_completed", "request_id": "4db92ac9-bd01-4d02-b4ae-8ecd35ba8d37", "level": "info", "timestamp": "2026-01-09T16:53:28.493857Z"}
+INFO:     127.0.0.1:62645 - "GET /health HTTP/1.1" 200 OK
+{"method": "GET", "path": "/", "query_params": {}, "client_ip": "127.0.0.1", "user_agent": "curl/8.7.1", "request_id": "ba6c74fb-1e86-4010-aeaf-01d31aaa797a", "event": "request_received", "level": "info", "timestamp": "2026-01-09T16:53:33.010284Z"}
+{"path": "/", "status_code": 404, "detail": "Not Found", "event": "http_exception", "request_id": "ba6c74fb-1e86-4010-aeaf-01d31aaa797a", "level": "error", "timestamp": "2026-01-09T16:53:33.015508Z"}
+{"status_code": 404, "process_time": 0.006, "request_id": "ba6c74fb-1e86-4010-aeaf-01d31aaa797a", "event": "request_completed_client_error", "level": "warning", "timestamp": "2026-01-09T16:53:33.016518Z"}
+{"method": "GET", "path": "/", "status_code": 404, "process_time": 0.007, "event": "request_completed", "request_id": "ba6c74fb-1e86-4010-aeaf-01d31aaa797a", "level": "info", "timestamp": "2026-01-09T16:53:33.016836Z"}
+INFO:     127.0.0.1:62656 - "GET / HTTP/1.1" 404 Not Found
+{"method": "GET", "path": "/", "query_params": {}, "client_ip": "127.0.0.1", "user_agent": "curl/8.7.1", "request_id": "47098e8c-29e8-453a-a89f-3e0ea66f8fa7", "event": "request_received", "level": "info", "timestamp": "2026-01-09T16:54:05.016539Z"}
+{"path": "/", "status_code": 404, "detail": "Not Found", "event": "http_exception", "request_id": "47098e8c-29e8-453a-a89f-3e0ea66f8fa7", "level": "error", "timestamp": "2026-01-09T16:54:05.022869Z"}
+{"status_code": 404, "process_time": 0.008, "request_id": "47098e8c-29e8-453a-a89f-3e0ea66f8fa7", "event": "request_completed_client_error", "level": "warning", "timestamp": "2026-01-09T16:54:05.023811Z"}
+{"method": "GET", "path": "/", "status_code": 404, "process_time": 0.009, "event": "request_completed", "request_id": "47098e8c-29e8-453a-a89f-3e0ea66f8fa7", "level": "info", "timestamp": "2026-01-09T16:54:05.024340Z"}
+INFO:     127.0.0.1:62848 - "GET / HTTP/1.1" 404 Not Found
+{"method": "POST", "path": "/parse_payment_data_ar", "query_params": {}, "client_ip": "127.0.0.1", "user_agent": "curl/8.7.1", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "event": "request_received", "level": "info", "timestamp": "2026-01-10T18:02:05.440080Z"}
+{"email": "perymury78@gmail.com", "base_url": "https://1win.lat/", "event": "payment_parser_starting", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:05.612281Z"}
+{"user_data_dir": "/Users/yevhen.shaforostov/.cache/mirrors_api/1win_ar_profile", "event": "payment_parser_using_persistent_context", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:05.624890Z"}
+{"url": "https://1win.lat/", "event": "payment_parser_navigating", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:13.815459Z"}
+{"message": "User already logged in, skipping login", "event": "payment_parser_already_logged_in", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:18.044327Z"}
+{"event": "payment_parser_navigating_to_deposit", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:18.044898Z"}
+{"text": "Deposit", "event": "payment_parser_deposit_clicked", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:23.167657Z"}
+{"event": "payment_parser_selecting_payment_method", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:23.168847Z"}
+{"provider": "Claro Pay", "status": "not_found", "current_url": "https://1win.lat/promotions?trid=banner1wBonusUpTo600INbr", "path": "/Users/yevhen.shaforostov/.cache/mirrors_api/screenshots/provider_claro_20260110_190226.png", "event": "payment_parser_provider_screenshot_taken", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:26.554210Z"}
+{"current_url": "https://1win.lat/promotions?trid=banner1wBonusUpTo600INbr", "event": "payment_parser_claro_pay_not_found", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "warning", "timestamp": "2026-01-10T18:02:26.554487Z"}
+{"event": "payment_parser_selecting_fiat_type", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:26.554659Z"}
+{"event": "payment_parser_extracting_data", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:31.624885Z"}
+{"event": "payment_parser_screenshot_taken", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:36.902378Z"}
+{"domain": "1win.lat", "event": "payment_parser_domain_extracted", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.020609Z"}
+{"path": "/Users/yevhen.shaforostov/.cache/mirrors_api/screenshots/payment_form_20260110_190237.png", "event": "payment_parser_screenshot_taken", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.175361Z"}
+{"domain": "1win.lat", "method": "Claro Pay", "url": "https://1win.lat/promotions?trid=banner1wBonusUpTo600INbr", "event": "payment_parser_success", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.175915Z"}
+{"has_url": true, "has_token": false, "event": "payment_parser_export_skipped_no_token", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.253577Z"}
+{"success": true, "domain": "1win.lat", "method": "Claro Pay", "url": "https://1win.lat/promotions?trid=banner1wBonusUpTo600INbr", "export_success": false, "event": "payment_parser_completed", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.253740Z"}
+{"status_code": 200, "process_time": 31.823, "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "event": "request_completed_success", "level": "info", "timestamp": "2026-01-10T18:02:37.257148Z"}
+{"method": "POST", "path": "/parse_payment_data_ar", "status_code": 200, "process_time": 31.833, "event": "request_completed", "request_id": "6e58dd14-eb8e-44a2-adb7-474fb1326c18", "level": "info", "timestamp": "2026-01-10T18:02:37.258233Z"}
+INFO:     127.0.0.1:53106 - "POST /parse_payment_data_ar HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"environment": "development", "event": "app_shutting_down", "level": "info", "timestamp": "2026-01-10T23:02:01.052354Z"}
+{"event": "browser_pool_closed", "level": "info", "timestamp": "2026-01-10T23:02:01.118425Z"}
+{"environment": "development", "event": "app_shutdown", "level": "info", "timestamp": "2026-01-10T23:02:01.132575Z"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52191]

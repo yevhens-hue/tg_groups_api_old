@@ -1,0 +1,31 @@
+INFO:     Will watch for changes in these directories: ['/Users/yevhen.shaforostov/tg_api']
+INFO:     Loading environment from '.env'
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+INFO:     Started reloader process [35366] using WatchFiles
+INFO:     Started server process [35369]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ Telegram client started
+INFO:     93.159.5.115:0 - "GET /search?q=bank&limit=50 HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "GET /search?q=account%20rent&limit=50 HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "GET /search?q=rent&limit=50 HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "HEAD /health HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56631 - "GET /health HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "HEAD /health HTTP/1.1" 405 Method Not Allowed
+INFO:     93.159.5.115:0 - "GET /health HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "GET /search?q=india%20bank&limit=10&types_only=channel,megagroup,group&min_members=0 HTTP/1.1" 200 OK
+INFO:     93.159.5.115:0 - "POST /search_multi HTTP/1.1" 404 Not Found
+INFO:     20.218.238.124:0 - "GET /search_multi HTTP/1.1" 404 Not Found
+WARNING:  WatchFiles detected changes in 'app.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [35369]
+INFO:     Started server process [36364]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36364]
+INFO:     Stopping reloader process [35366]

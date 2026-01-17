@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Redis для кэширования (опционально, но рекомендуется)
+  redis:
+    image: redis:7-alpine
+    container_name: providers-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: providers-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../providers_data.db:/app/data/providers_data.db
+      - ../storage.py:/app/storage.py
+      - ../screenshots:/app/screenshots
+      - ../google_credentials.json:/app/google_credentials.json:ro
+      - ./backend/app:/app/app
+    environment:
+      - DB_PATH=/app/data/providers_data.db
+      - XLSX_PATH=/app/data/providers_data.xlsx
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-change-me-in-production}
+      - AUTH_ENABLED=${AUTH_ENABLED:-false}
+      - GOOGLE_SHEET_ID=${GOOGLE_SHEET_ID:-}
+      - GOOGLE_CREDENTIALS_PATH=/app/google_credentials.json
+      - REDIS_URL=redis://redis:6379
+      - CACHE_TTL=300
+      - ENVIRONMENT=development
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend (React)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: providers-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://localhost:8000/api
+
+volumes:
+  redis_data:
+
+networks:
+  default:
+    name: providers-network

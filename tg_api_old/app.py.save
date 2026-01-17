@@ -1,0 +1,146 @@
+
+from datetime import datetime
+from typing import List, Optional
+
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+from dotenv import load_dotenv
+from mirrors import MERCHANTS, serpapi_google_search, classify_url
+
+# Загружаем переменные из .env (TG_API_ID, TG_API_HASH и т.д.)
+load_dotenv()
+
+from tg_service import search_groups as tg_search, TgChat
+
+app = FastAPI(
+    title="TG API",
+    docs_url="/docs",
+    openapi_url="/openapi.json",
+)
+# ===========================
+#    MIRROR FINDER API
+# ===========================
+
+class CollectMirrorsRequest(BaseModel):
+    merchant: str
+    keyword: str
+    country: str = "in"
+    lang: str = "en"
+    limit: int = 20
+
+
+class CollectMirrorsBatchRequest(BaseModel):
+    merchants: List[str]
+    keywords: List[str]
+    country: str = "in"
+    lang: str = "en"
+    limit: int = 20
+
+
+@app.post("/collect_mirrors")
+async def collect_mirrors(req: CollectMirrorsRequest):
+    if req.merchant not in MERCHANTS:
+        return {"error": f"Unknown merchant: {req.merchant}"}
+
+    cfg = MERCHANTS[req.merchant]
+
+    query = f"{cfg['brand']} {req.keyword}"
+
+    urls = serpapi_google_search(
+        query,
+        gl=req.country,
+        hl=req.lang,
+        num=req.limit,
+    )
+
+    results = [classify_url(u, cfg) for u in urls]
+
+    grouped = {
+        "main_mirror": [],
+        "brand_like_mirror": [],
+        "prelander": [],
+        "other": [],
+    }
+
+    for r in results:
+        grouped[r["type"]].append(r)
+
+    return {
+        "ok": True,
+        "merchant": req.merchant,
+        "keyword": req.keyword,
+        "country": req.country,
+        "results": grouped,
+    }
+# ===========================
+#    TELEGRAM GROUP SEARCH
+# ===========================
+
+class SearchGroupsRequest(BaseModel):
+    query: str = Field(..., description="Поисковый запрос в Telegram")
+    limit: int = Field(10, description="Максимум результатов")
+    types_only: str = Field(
+        "channel,megagroup,group",
+        description="Типы чатов через запятую",
+    )
+    min_members: int = Field(
+        0,
+        description="Мин. количество участников",
+    )
+
+
+@app.post("/search_groups")
+async def search_groups(req: SearchGroupsRequest):
+    result = await tg_search(
+        q=req.query,
+        limit=req.limit,
+        types_only=req.types_only,
+z
+    for merchant in req.merchants:
+        if merchant not in MERCHANTS:
+            items.append({
+                "merchant": merchant,
+                "keyword": None,
+                "error": f"Unknown merchant: {merchant}",
+            })
+            continue
+
+        cfg = MERCHANTS[merchant]
+
+        for keyword in req.keywords:
+            query = f"{cfg['brand']} {keyword}"
+
+            urls = serpapi_google_search(
+                query,
+                gl=req.country,
+                hl=req.lang,
+                num=req.limit,
+            )
+
+            results = [classify_url(u, cfg) for u in urls]
+
+            grouped = {
+                "main_mirror": [],
+                "brand_like_mirror": [],
+                "prelander": [],
+                "other": [],
+            }
+
+            for r in results:
+                grouped[r["type"]].append(r)
+
+            items.append({
+                "merchant": merchant,
+                "keyword": keyword,
+                "results": grouped,
+            })
+
+    return {
+        "ok": True,
+        "country": req.country,
+        "lang": req.lang,
+        "limit": req.limit,
+        "items": items,
+    }
+

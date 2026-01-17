@@ -1,0 +1,104 @@
+from fastapi import FastAPI, Query
+from telethon import TelegramClient
+from telethon.sessions import StringSession
+import os
+import asyncio
+
+app = FastAPI(title="Telegram Search API", version="1.0.0")
+
+# --- Настройки Telegram API ---
+API_ID = int(os.getenv("TG_API_ID", "0"))
+API_HASH = os.getenv("TG_API_HASH", "")
+SESSION = os.getenv("TG_SESSION", "")
+
+if not (API_ID and API_HASH and SESSION):
+    raise RuntimeError("❌ Не заданы TG_API_ID, TG_API_HASH, TG_SESSION")
+
+client = TelegramClient(StringSession(SESSION), API_ID, API_HASH)
+
+@app.on_event("startup")
+async def startup_event():
+    await client.start()
+    print("✅ Telegram client started")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    await client.disconnect()
+    print("🛑 Telegram client stopped")
+
+@app.get("/")
+def root():
+    return {"ok": True, "msg": "Hello from FastAPI"}
+
+@app.get("/search")
+async def search(q: str = Query(..., description="Ключевые слова для поиска"),
+                 limit: int = Query(10, le=50, description="Макс. количество результатов")):
+    """
+    Поиск Telegram групп и каналов по ключевым словам.
+    Возвращает JSON со списком найденных чатов.
+    """
+    results = []
+    async for dialog in client.iter_dialogs():
+        if q.lower() in dialog.name.lower():
+            entity = dialog.entity
+            if getattr(entity, "megagroup", False) or getattr(entity, "broadcast", False):
+                results.append({
+                    "id": entity.id,
+                    "type": "supergroup" if getattr(entity, "megagroup", False) else "channel",
+                    "title": dialog.name,
+                    "username": getattr(entity, "username", None),
+                    "link": f"https://t.me/{entity.username}" if getattr(entity, "username", None) else None
+                })
+        if len(results) >= limit:
+            break
+    return results
+
+@app.get("/health")
+async def health():
+    return {"status":"ok"}
+from fastapi import Body
+from typing import Set
+
+@app.post("/search_multi")
+async def search_multi(
+    queries: list[str] = Body(..., embed=True),
+    limit: int = 20,
+    types_only: str = "channel,megagroup,group",
+    min_members: int = 0
+):
+    seen: Set[int] = set()
+    combined = []
+    for q in queries:
+        r = await search(q=q, limit=limit, types_only=types_only, min_members=min_members)
+        for item in r.results:
+            if item.id not in seen:
+                seen.add(item.id)
+                combined.append(item)
+    return {"queries": queries, "count": len(combined), "results": combined}
+
+import asyncio
+from fastapi import Body
+from typing import Set
+
+@app.post("/search_multi_safe")
+async def search_multi_safe(
+    queries: list[str] = Body(..., embed=True),
+    limit: int = 20,
+    types_only: str = "channel,megagroup,group",
+    min_members: int = 0,
+    delay_ms: int = 800
+):
+    seen: Set[int] = set()
+    combined = []
+    errors = []
+    for q in queries:
+        try:
+            r = await search(q=q, limit=limit, types_only=types_only, min_members=min_members)
+            for item in r.results:
+                if item.id not in seen:
+                    seen.add(item.id)
+                    combined.append(item)
+        except Exception as e:
+            errors.append({"query": q, "error": str(e)})
+        await asyncio.sleep(max(delay_ms,0)/1000)
+    return {"queries": queries, "count": len(combined), "results": combined, "errors": errors}

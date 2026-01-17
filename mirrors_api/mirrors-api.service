@@ -1,0 +1,57 @@
+[Unit]
+Description=Merchant Mirrors API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/mirrors_api
+Environment="PATH=/opt/mirrors_api/.venv/bin"
+EnvironmentFile=/opt/mirrors_api/.env
+ExecStart=/opt/mirrors_api/.venv/bin/uvicorn app:app \
+    --host 0.0.0.0 \
+    --port 8011 \
+    --workers 4 \
+    --log-level info \
+    --no-access-log \
+    --proxy-headers \
+    --forwarded-allow-ips "*" \
+    --timeout-keep-alive 30 \
+    --timeout-graceful-shutdown 30
+
+# Альтернатива с Gunicorn:
+# ExecStart=/opt/mirrors_api/.venv/bin/gunicorn app:app \
+#     --bind 0.0.0.0:8011 \
+#     --workers 4 \
+#     --worker-class uvicorn.workers.UvicornWorker \
+#     --log-level info \
+#     --access-logfile - \
+#     --error-logfile - \
+#     --timeout 120 \
+#     --keep-alive 30 \
+#     --max-requests 1000 \
+#     --max-requests-jitter 100 \
+#     --preload
+
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mirrors-api
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/mirrors_api
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target
+
+

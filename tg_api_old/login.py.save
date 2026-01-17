@@ -1,0 +1,16 @@
+from telethon import TelegramClient
+import os
+
+API_ID = int(os.environ["TG_API_ID"])
+API_HASH = os.environ["TG_API_HASH"]
+SESSION_PATH = os.path.join("sessions", "tg_session")
+
+client = TelegramClient(SESSION_PATH, API_ID, API_HASH)
+
+async def main():
+    await client.start()
+    print("Logged in successfully!")
+
+with client:
+    client.loop.run_until_complete(main())
+

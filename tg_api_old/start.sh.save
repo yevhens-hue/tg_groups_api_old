@@ -1,0 +1,23 @@
+#!/bin/zsh cd "$(dirname "$0")"
+
+source .venv/bin/activate
+export PYTHONPATH=$(pwd)
+
+uvicorn app:app --reload --port 8010
+#!/bin/zsh
+
+cd ~/tg_api
+
+# Активируем виртуальное окружение
+source .venv/bin/activate
+
+# Загружаем переменные окружения из .env
+set -a
+source .env
+set +a
+
+# Закрываем старый uvicorn на 8010 (если висит)
+kill -9 $(lsof -t -i:8010) 2>/dev/null || echo "Port 8010 is free"
+
+echo "Starting FastAPI on http://127.0.0.1:8010 ..."
+uvicorn auth:app --host 127.0.0.1 --port 8010 --reload --env-file .env

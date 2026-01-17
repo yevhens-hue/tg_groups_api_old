@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: tg-groups-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: ./start.sh
+    envVars:
+      - key: TG_API_ID
+        sync: false
+      - key: TG_API_HASH
+        sync: false
+      - key: TG_SESSION_STRING
+        sync: false
+      - key: REDIS_URL
+        sync: false
+        optional: true
+      - key: LOG_LEVEL
+        value: INFO
+      - key: HTTP_RATE_LIMIT_RPM
+        value: "60"
+      - key: CIRCUIT_BREAKER_FAILURE_THRESHOLD
+        value: "5"
+      - key: CIRCUIT_BREAKER_RECOVERY_TIMEOUT_SEC
+        value: "60"
+
+
+

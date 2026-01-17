@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "merchant": "stake",
+      "keywords": [
+        "stake argentina",
+        "stake mirror argentina",
+        "stake enlace argentina",
+        "stake ingresar argentina"
+      ],
+      "country": "ar",
+      "lang": "es",
+      "limit": 20
+    },
+    {
+      "merchant": "1xbet",
+      "keywords": [
+        "1xbet argentina",
+        "1xbet mirror argentina",
+        "1xbet enlace argentina",
+        "1xbet ingresar"
+      ],
+      "country": "ar",
+      "lang": "es",
+      "limit": 20
+    },
+    {
+      "merchant": "1win",
+      "keywords": [
+        "1win argentina",
+        "1win espejo",
+        "1win enlace argentina",
+        "1win ingresar"
+      ],
+      "country": "ar",
+      "lang": "es",
+      "limit": 20
+    }
+  ],
+  "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1ubWNiixJEzQxu9kLO1GAosbdiXw1-kIGnsJjdwzFDJQ/edit?gid=465762212#gid=465762212",
+  "range_name": "Sheet1!A2:Z",
+  "clear_first": false,
+  "follow_redirects": true,
+  "limit": 20
+}
+
+

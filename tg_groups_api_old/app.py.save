@@ -1,0 +1,49 @@
+from typing import List
+
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+from tg_service import search_groups as tg_search
+
+
+app = FastAPI(
+    title="TG Groups API",
+    docs_url="/docs",
+    openapi_url="/openapi.json",
+)
+
+
+class SearchGroupsRequest(BaseModel):
+    query: str = Field(..., description="Поисковый запрос в Telegram")
+    limit: int = Field(10, description="Максимум результатов")
+    types_only: str = Field(
+        "channel,megagroup,group",
+        description="Типы чатов через запятую",
+    )
+    min_members: int = Field(
+        0,
+        description="Мин. количество участников",
+    )
+
+
+class TgChatResponse(BaseModel):
+    id: int
+    title: str
+    username: str | None
+    type: str
+    members: int | None
+    link: str | None
+
+
+@app.post("/search_groups", response_model=List[TgChatResponse])
+async def search_groups(req: SearchGroupsRequest):
+    """
+    Ищем группы/каналы в Телеграме.
+    """
+    result = await tg_search(
+        query=req.query,
+        limit=req.limit,
+        types_only=req.types_only,
+        min_members=req.min_members,
+    )
+    return result
