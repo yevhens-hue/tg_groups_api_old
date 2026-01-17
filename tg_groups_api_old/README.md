@@ -4,6 +4,28 @@ Production-ready FastAPI service for Telegram group lookups with Telethon.
 
 ## 🚀 Quick Start
 
+### 🆕 Установка на новом компьютере
+
+**Полная инструкция:** [`SETUP_NEW_COMPUTER.md`](SETUP_NEW_COMPUTER.md)
+
+```bash
+# 1. Клонируйте репозиторий
+git clone https://github.com/yevhens-hue/tg_groups_api_old.git
+cd tg_groups_api_old
+
+# 2. Создайте виртуальное окружение
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# или .venv\Scripts\activate  # Windows
+
+# 3. Установите зависимости
+pip install -r requirements.txt
+
+# 4. Создайте .env файл с TG_API_ID, TG_API_HASH
+# 5. Создайте сессию: python login.py
+# 6. Запустите: ./start.sh
+```
+
 ### Local Development
 ```bash
 # Install dependencies
