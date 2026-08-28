@@ -36,3 +36,6 @@ pip install -r requirements.txt
 ```bash
 python main_api.py
 ```
+
+
+<!-- activity-sync: 2026-08-28 -->
